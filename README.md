@@ -24,7 +24,7 @@
 - 🔍 **Sorting with Cell Selection**  
   Select a column or range of cells and sort them in ascending or descending order with toggle-based sorting.
 
-- 🔤 **Text Formatting** *(optional if implemented)*  
+- 🔤 **Text Formatting**  
   Support for bold, italic, underline, and text alignment within cells.
 
 - 🖱️ **Mouse-based Selection**  
