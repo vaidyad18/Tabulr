@@ -20,9 +20,9 @@ body{
 }
 
 .btn:hover{
-  background-color: #4285f4;
+  background-color: #3162af;
   color: white;
-  border-color: #4285f4;
+  transition-duration: 200ms;
 }
 
 .header {
@@ -54,6 +54,7 @@ body{
 
 .btn {
   color: white;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   padding: 7px 0px; /* 4px 8px */
   border-radius: 0.25rem; /* 4px */
   border: none;
@@ -75,9 +76,12 @@ body{
   cursor: pointer;
   border-radius: 4px;
 }
+.edit-btn:hover{
+  background-color: blue;
+}
 
 .btn-active {
-  background: #007bff;
+  background: #565656;
   color: white;
   font-weight: bold;
 }
@@ -111,10 +115,8 @@ body{
 .formatting-buttons .edit-btn {
   margin: 0 4px;
   padding: 4px 8px;
-  font-weight: bold;
   border: 1px solid #aaa;
   background-color: white;
-  color: black;
   cursor: pointer;
   border-radius: 4px;
   transition: 0.2s;
@@ -172,7 +174,6 @@ body{
   border-bottom: 1px solid #e5e7eb;
   border-left: 1px solid #e5e7eb;
   border-right: 1px solid #e5e7eb;
-  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -195,9 +196,14 @@ body{
   font-weight: bold;
   position: sticky;
   left: 0;
-  background-color: white;
   z-index: 10;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}
+
+.table-row:focus-within .row-header-cell {
+  background-color: #cce5ff;
+  font-weight: bold;
 }
 
 .row-resize-handle {
@@ -270,9 +276,6 @@ body{
   background: #555;
 }
 
-.focused-header-bg {
-  background-color: #dbeafe !important;
-}
 
 @media (max-width: 1200px) {
   .header {
@@ -343,11 +346,6 @@ body{
     font-size: 12px;
     width: auto;
     max-width: 150px;
-  }
-  
-  .header .formatting-buttons .edit-btn {
-    padding: 4px 8px;
-    font-size: 12px;
   }
 
   .format-1,

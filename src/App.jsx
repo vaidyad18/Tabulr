@@ -296,33 +296,6 @@ const App = ({
             <button onClick={() => handleFormat("redo")} className="edit-btn">
               <Redo size={16} />
             </button>
-            <input
-              type="color"
-              onChange={(e) => {
-                const color = e.target.value;
-
-                // First, try to focus back the current cell
-                const key = `${focusedCell.row}-${focusedCell.col}`;
-                const el = refs.current[key];
-
-                if (el) {
-                  el.focus(); // Ensure editable div is active
-                  document.execCommand("styleWithCSS", false, true); // Required in some cases
-                  document.execCommand("foreColor", false, color);
-                }
-              }}
-              title="Text Color"
-              style={{
-                marginLeft: "4px",
-                height: "28px",
-                verticalAlign: "middle",
-                cursor: "pointer",
-                borderRadius: "4px",
-                padding: 0,
-                border: "1px solid #ccc",
-              }}
-            />
-
           </div>
         </div>
         <div className="controls-container">
@@ -376,10 +349,14 @@ const App = ({
               {Array.from({ length: rows }, (_, rowIndex) => (
                 <tr key={rowIndex} style={{ height: rowHeights[rowIndex] }}>
                   <th
-                    className={`row-header-cell relative-cell ${focusedCell.row === rowIndex ? "focused-header-bg" : ""
+                    className={`row-header-cell relative-cell ${focusedCell.row === rowIndex? "rgb(138, 212, 255)"
+                          : "rgb(214, 233, 244)"
                       }`}
                     style={{
-                      backgroundColor: "rgb(214, 233, 244)",
+                      backgroundColor:
+                        focusedCell.row === rowIndex
+                          ? "rgb(138, 212, 255)"
+                          : "rgb(214, 233, 244)",
                     }}
                   >
                     {rowIndex + 1}
