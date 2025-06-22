@@ -13,7 +13,7 @@ const getColumnLabel = (index) => {
 
 const App = ({
   rows: initialRows = 15,
-  cols: initialCols = 18,
+  cols: initialCols = 15,
   initialData = {},
 }) => {
   const [data, setData] = useState(initialData);
@@ -325,10 +325,6 @@ const App = ({
 
           </div>
         </div>
-
-
-
-
         <div className="controls-container">
           <button onClick={() => addRowAt(focusedCell.row)} className="btn">
             Add Row
@@ -346,6 +342,7 @@ const App = ({
 
         </div>
       </header>
+      
       <div className="table-container">
         <div style={{ minWidth: `${cols * 96 + 48}px` }}>
           <table className="table">

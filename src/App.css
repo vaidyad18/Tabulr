@@ -12,14 +12,24 @@
   justify-content: center;
   font-family: serif;
 }
+
+body{
+
+  background-color: rgb(238, 245, 255);
+}
+
+.btn:hover{
+  background-color: rgb(109, 109, 255);
+  transition-duration: 200ms;
+}
+
 .header {
   display: flex;
   align-items: center;
   color: white;
-  background-color: rgb(229, 243, 254);
+  background-color: rgb(238, 245, 255);
   padding: 12px 200px;
   justify-content: space-between;
-  
   gap: 100px;
 }
 
@@ -118,12 +128,15 @@
   overflow: auto;
   flex-grow: 1;
   min-width: 0;
+  margin: 0px 20px 20px 20px;
+  border-radius: 25px;
 }
 
 .table {
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
+  width: 100%;
 }
 
 .header-cell {
@@ -133,6 +146,8 @@
   padding: 0.5rem;
   text-align: center;
   font-weight: bolder;
+  position: sticky;
+  top: 0;
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -158,15 +173,14 @@
 
 
 .col-resize-handle {
+  background: transparent;
   position: absolute;
   right: 0;
   top: 0;
-  height: 100%;
-  width: 4px; /* w-1 */
+  bottom: 0;
+  width: 5px;
   cursor: col-resize;
-  z-index: 10;
 }
-
 .row-header-cell {
   width: 3rem; /* 48px */
   border-top: 1px solid #e5e7eb;
@@ -195,6 +209,7 @@
   border-bottom: 1px solid #e5e7eb;
   padding: 0;
   transition: background-color 0.2s ease; /* Added transition */
+  background-color: white;
 }
 
 .table-cell:hover {
@@ -222,8 +237,8 @@
   padding: 15px 20px 15px 20px;
   border-radius: 60px;
   position: absolute;
-  right: 30px;
-  bottom: 20px;
+  right: 50px;
+  bottom: 45px;
   color: black;
   background-color: #ededed;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
