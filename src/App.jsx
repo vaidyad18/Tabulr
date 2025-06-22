@@ -1,3 +1,4 @@
+import { AlignCenter, AlignLeft, AlignRight, Bold, BoldIcon, Italic, Redo, Underline, Undo } from "lucide-react";
 import "./App.css";
 import React, { useState, useEffect, useRef } from "react";
 
@@ -28,7 +29,7 @@ const App = ({
     italic: false,
     underline: false,
   });
-  
+
   const refs = useRef({});
 
   const focusCell = (row, col) => {
@@ -55,15 +56,15 @@ const App = ({
       });
     }, 0);
   };
-  
-  
+
+
   useEffect(() => {
     document.addEventListener("selectionchange", updateFormattingState);
     return () => {
       document.removeEventListener("selectionchange", updateFormattingState);
     };
   }, []);
-  
+
   useEffect(() => {
     focusCell(focusedCell.row, focusedCell.col);
   }, [focusedCell]);
@@ -259,25 +260,72 @@ const App = ({
       <header className="header">
         <div className="header-title">Tabulr</div>
         <div className="formatting-buttons">
-  <button
-    onClick={() => handleFormat("bold")}
-    className={`btn ${formattingState.bold ? "btn-active" : ""}`}
-  >
-    B
-  </button>
-  <button
-    onClick={() => handleFormat("italic")}
-    className={`btn ${formattingState.italic ? "btn-active" : ""}`}
-  >
-    I
-  </button>
-  <button
-    onClick={() => handleFormat("underline")}
-    className={`btn ${formattingState.underline ? "btn-active" : ""}`}
-  >
-    U
-  </button>
-</div>
+          <div className="format-1">
+            <button
+              onClick={() => handleFormat("bold")}
+              className={`edit-btn ${formattingState.bold ? "btn-active" : ""}`}
+            >
+              <BoldIcon size={16} />
+            </button>
+            <button
+              onClick={() => handleFormat("italic")}
+              className={`edit-btn ${formattingState.italic ? "btn-active" : ""}`}
+            >
+              <Italic size={16} />
+            </button>
+            <button
+              onClick={() => handleFormat("underline")}
+              className={`edit-btn ${formattingState.underline ? "btn-active" : ""}`}
+            >
+              <Underline size={16} />
+            </button>
+            <button onClick={() => handleFormat("justifyLeft")} className="edit-btn">
+              <AlignLeft size={16} />
+            </button>
+            <button onClick={() => handleFormat("justifyCenter")} className="edit-btn">
+              <AlignCenter size={16} />
+            </button>
+            <button onClick={() => handleFormat("justifyRight")} className="edit-btn">
+              <AlignRight size={16} />
+            </button>
+          </div>
+          <div className="format-2">
+            <button onClick={() => handleFormat("undo")} className="edit-btn">
+              <Undo size={16} />
+            </button>
+            <button onClick={() => handleFormat("redo")} className="edit-btn">
+              <Redo size={16} />
+            </button>
+            <input
+              type="color"
+              onChange={(e) => {
+                const color = e.target.value;
+
+                // First, try to focus back the current cell
+                const key = `${focusedCell.row}-${focusedCell.col}`;
+                const el = refs.current[key];
+
+                if (el) {
+                  el.focus(); // Ensure editable div is active
+                  document.execCommand("styleWithCSS", false, true); // Required in some cases
+                  document.execCommand("foreColor", false, color);
+                }
+              }}
+              title="Text Color"
+              style={{
+                marginLeft: "4px",
+                height: "28px",
+                verticalAlign: "middle",
+                cursor: "pointer",
+                borderRadius: "4px",
+                padding: 0,
+                border: "1px solid #ccc",
+              }}
+            />
+
+          </div>
+        </div>
+
 
 
 
