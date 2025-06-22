@@ -2,6 +2,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .controls-container {
@@ -11,16 +12,17 @@
   align-items: center;
   justify-content: center;
   font-family: serif;
+  border-color: #4285f4;
 }
 
 body{
-
   background-color: rgb(238, 245, 255);
 }
 
 .btn:hover{
-  background-color: rgb(109, 109, 255);
-  transition-duration: 200ms;
+  background-color: #4285f4;
+  color: white;
+  border-color: #4285f4;
 }
 
 .header {
@@ -148,9 +150,11 @@ body{
   font-weight: bolder;
   position: sticky;
   top: 0;
-  z-index: 10;
+  background-color: white;
+  z-index: 15;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .header-cell:first-of-type {
   border-left: 1px solid #e5e7eb;
@@ -191,6 +195,7 @@ body{
   font-weight: bold;
   position: sticky;
   left: 0;
+  background-color: white;
   z-index: 10;
   box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
 }
@@ -266,5 +271,87 @@ body{
 }
 
 .focused-header-bg {
-  background-color: rgb(138, 212, 255) !important;
+  background-color: #dbeafe !important;
+}
+
+@media (max-width: 1200px) {
+  .header {
+    padding: 12px 100px;
+    gap: 50px;
+  }
+  
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .header-title {
+    font-size: 40px;
+  }
+
+  .controls-container {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .btn {
+    width: auto;
+    max-width: 200px;
+  }
+
+  .sort-btn {
+    margin-right: 10px;
+  }
+
+  .formatting-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .table-container {
+    margin: 0 10px 10px 10px;
+  }
+
+  .focused-cell-info {
+    position: static;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    bottom: 0;
+    right: 0;
+    box-shadow: none;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 32px;
+  }
+
+  .header .btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    width: auto;
+    max-width: 150px;
+  }
+  
+  .header .formatting-buttons .edit-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .format-1,
+  .format-2 {
+    flex-wrap: wrap;
+  }
 }
