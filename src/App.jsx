@@ -23,6 +23,12 @@ const App = ({
   const [rowHeights, setRowHeights] = useState(Array(initialRows).fill(40));
   const [selectedRange, setSelectedRange] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc"); // default to ascending
+  const [formattingState, setFormattingState] = useState({
+    bold: false,
+    italic: false,
+    underline: false,
+  });
+  
   const refs = useRef({});
 
   const focusCell = (row, col) => {
@@ -30,7 +36,34 @@ const App = ({
     const el = refs.current[key];
     if (el) el.focus();
   };
+  const updateFormattingState = () => {
+    setFormattingState({
+      bold: document.queryCommandState("bold"),
+      italic: document.queryCommandState("italic"),
+      underline: document.queryCommandState("underline"),
+    });
+  };
 
+  const handleFormat = (command) => {
+    document.execCommand(command);
+    // Force update the formatting state after applying the command
+    setTimeout(() => {
+      setFormattingState({
+        bold: document.queryCommandState("bold"),
+        italic: document.queryCommandState("italic"),
+        underline: document.queryCommandState("underline"),
+      });
+    }, 0);
+  };
+  
+  
+  useEffect(() => {
+    document.addEventListener("selectionchange", updateFormattingState);
+    return () => {
+      document.removeEventListener("selectionchange", updateFormattingState);
+    };
+  }, []);
+  
   useEffect(() => {
     focusCell(focusedCell.row, focusedCell.col);
   }, [focusedCell]);
@@ -225,6 +258,29 @@ const App = ({
     <main className="app-main">
       <header className="header">
         <div className="header-title">Tabulr</div>
+        <div className="formatting-buttons">
+  <button
+    onClick={() => handleFormat("bold")}
+    className={`btn ${formattingState.bold ? "btn-active" : ""}`}
+  >
+    B
+  </button>
+  <button
+    onClick={() => handleFormat("italic")}
+    className={`btn ${formattingState.italic ? "btn-active" : ""}`}
+  >
+    I
+  </button>
+  <button
+    onClick={() => handleFormat("underline")}
+    className={`btn ${formattingState.underline ? "btn-active" : ""}`}
+  >
+    U
+  </button>
+</div>
+
+
+
         <div className="controls-container">
           <button onClick={() => addRowAt(focusedCell.row)} className="btn">
             Add Row
@@ -239,7 +295,7 @@ const App = ({
 
         <div className="focused-cell-info">
           Focused Cell: {getColumnLabel(focusedCell.col)}{focusedCell.row + 1}
-          
+
         </div>
       </header>
       <div className="table-container">
@@ -306,14 +362,15 @@ const App = ({
                           handleCellMouseDown(rowIndex, colIndex)
                         }
                       >
-                        <input
+                        <div
                           ref={(el) => (refs.current[key] = el)}
-                          type="text"
-                          className="cell-input"
-                          value={data[key] || ""}
-                          onChange={(e) =>
-                            handleChange(e, rowIndex, colIndex)
-                          }
+                          contentEditable
+                          className="cell-input editable"
+                          suppressContentEditableWarning
+                          onInput={(e) => {
+                            const value = e.currentTarget.innerHTML;
+                            setData((prev) => ({ ...prev, [`${rowIndex}-${colIndex}`]: value }));
+                          }}
                           onFocus={() =>
                             setFocusedCell({ row: rowIndex, col: colIndex })
                           }
@@ -321,6 +378,8 @@ const App = ({
                             handleKeyDown(e, rowIndex, colIndex)
                           }
                         />
+
+
                       </td>
                     );
                   })}

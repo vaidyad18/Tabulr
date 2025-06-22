@@ -54,6 +54,36 @@
   font-size: 14px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.editable {
+  min-height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 6px;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.formatting-buttons .btn {
+  margin: 0 4px;
+  font-weight: bold;
+}
+.formatting-buttons .btn {
+  margin: 0 4px;
+  padding: 4px 8px;
+  font-weight: bold;
+  border: 1px solid #aaa;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.formatting-buttons .btn-active {
+  background-color: #4285f4;
+  color: white;
+  border-color: #4285f4;
+}
 
 .table-container {
   overflow: auto;
