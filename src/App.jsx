@@ -23,7 +23,7 @@ const App = ({
   const [colWidths, setColWidths] = useState(Array(initialCols).fill(96));
   const [rowHeights, setRowHeights] = useState(Array(initialRows).fill(40));
   const [selectedRange, setSelectedRange] = useState(null);
-  const [sortOrder, setSortOrder] = useState("asc"); // default to ascending
+  const [sortOrder, setSortOrder] = useState("asc");
   const [formattingState, setFormattingState] = useState({
     bold: false,
     italic: false,
@@ -47,7 +47,6 @@ const App = ({
 
   const handleFormat = (command) => {
     document.execCommand(command);
-    // Force update the formatting state after applying the command
     setTimeout(() => {
       setFormattingState({
         bold: document.queryCommandState("bold"),
@@ -252,7 +251,7 @@ const App = ({
     }
 
     setData(updatedData);
-    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc")); // toggle after sorting
+    setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
   };
 
   return (
@@ -305,7 +304,7 @@ const App = ({
           <button onClick={() => addColAt(focusedCell.col)} className="btn">
             Add Column
           </button>
-          <button onClick={sortSelected} className="btn btn-sort">
+          <button onClick={sortSelected} className="btn sort-btn">
             Sort
           </button>
         </div>
@@ -332,7 +331,7 @@ const App = ({
                           ? "rgb(138, 212, 255)"
                           : "rgb(214, 233, 244)",
                     }}
-                    className="header-cell relative-cell"
+                    className="header-cell"
                   >
                     {getColumnLabel(colIndex)}
                     <div
@@ -349,9 +348,7 @@ const App = ({
               {Array.from({ length: rows }, (_, rowIndex) => (
                 <tr key={rowIndex} style={{ height: rowHeights[rowIndex] }}>
                   <th
-                    className={`row-header-cell relative-cell ${focusedCell.row === rowIndex? "rgb(138, 212, 255)"
-                          : "rgb(214, 233, 244)"
-                      }`}
+                    className="row-header-cell"
                     style={{
                       backgroundColor:
                         focusedCell.row === rowIndex
